@@ -1,22 +1,40 @@
-{% extends 'users/base.html' %}
-
-{% block content %}
-    <h2>register</h2>
-
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-            <p>
-                {{ field.label_tag }}<br>
-                {{ field }}<br>
-                {% if field.help_text %}
-                    <small style="color: grey">{{ field.help_text }}</small>
-                {% endif %}
-                {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                {% endfor %}
-            </p>
-        {% endfor %}
-        <button type="submit">register</button>
-    </form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bear Home - Register</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-center">
+    <div class="container">
+        <div class="flex-center">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <h3>Register with the Bear Home</h3>
+                <form class="form" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+                <div class="flex-center top-gap text-small">
+                    <a href="{% url 'users:login' %}">Already got account? Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

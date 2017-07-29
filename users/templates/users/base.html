@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="zh-cn">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Welcome to Bear Home</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Bear Home!</h1>
-        {% if user.is_authenticated %}
-            Hi, <font style="color: blue">{{ user.username }}</font>, welcom back!
-            <a href="{% url 'users:logout' %}">logout</a> - <a href="{% url 'users:change' %}">change</a>
-        {% else %}
-            <a href="{% url 'users:login' %}">login</a> - <a href="{% url 'users:register' %}">register</a>
-        {% endif %}
-    </header>
-    <main>
+<div class="flex-center">
+    <div class="container">
+        <div>
+            <h1 class="logo"><a href="{% url 'index' %}">Welcome to Bear Home</a></h1>
+
+            {% if user.is_authenticated %}
+                <p>Welcome come back: <a href="#">{{ user.username }}</a>!</p>
+                <button class="btn btn-default"><a href="{% url 'users:logout' %}">Logout</a></button> or
+                <button class="btn btn-default"><a href="{% url 'users:change' %}">Change Password</a></button>
+            {% else %}
+                <p>You're not logged in yet, please
+                    <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
+                    or
+                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Register</a></button>
+                </p>
+            {% endif %}
+        </div>
         {% block content %}{% endblock %}
-    </main>
+    </div>
+</div>
 </body>
 </html>
