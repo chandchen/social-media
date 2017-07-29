@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Bear Home</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Bear Home!</h1>
+        {% if user.is_authenticated %}
+            Hi, <font style="color: blue">{{ user.username }}</font>, welcom back!
+            <a href="{% url 'users:logout' %}">logout</a> - <a href="{% url 'users:change' %}">change</a>
+        {% else %}
+            <a href="{% url 'users:login' %}">login</a> - <a href="{% url 'users:register' %}">register</a>
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
