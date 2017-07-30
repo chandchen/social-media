@@ -11,17 +11,17 @@
 <div class="flex-center">
     <div class="container">
         <div>
-            <h1 class="logo"><a href="{% url 'index' %}">Welcome to Bear Home</a></h1>
-
+            <h1 class="logo"><a href="{% url 'index' %}">Bear Home</a></h1>
             {% if user.is_authenticated %}
-                <p>Welcome come back: <a href="#">{{ user.username }}</a>!</p>
-                <button class="btn btn-default"><a href="{% url 'users:logout' %}">Logout</a></button> or
-                <button class="btn btn-default"><a href="{% url 'users:change' %}">Change Password</a></button>
+                <p>Welcome come back: <a href="#">{{ user.username }}</a>!
+                    <button class="btn btn-default"><a href="{% url 'users:logout' %}">Logout</a></button> or
+                    <button class="btn btn-default"><a href="{% url 'users:change' %}">Modify Password</a></button>
+                </p>
             {% else %}
                 <p>You're not logged in yet, please
                     <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
                     or
-                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Register</a></button>
+                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
                 </p>
             {% endif %}
         </div>

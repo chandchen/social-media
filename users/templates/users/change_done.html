@@ -11,8 +11,9 @@
 <div class="flex-center">
     <div class="container">
         <div>
-            <h3>Congratulation, {{ user.username }}, password changed successfully.</h3>
-            <button class="btn btn-default"><a href="{% url 'index' %}">Come back...</a></button>
+            <h1 class="logo"><a href="{% url 'index' %}">Welcome to Bear Home</a></h1>
+            <h2>Congratulation, {{ user.username }}, password changed successfully.</h2>
+            <button class="btn btn-default"><a href="{% url 'index' %}">Come back to Profile...</a></button>
         </div>
     </div>
 </div>
