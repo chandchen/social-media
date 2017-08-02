@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bear Home - Profile</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-center">
+    <div class="container">
+        <div class="flex-center">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <div>
+                <h2 class="logo"><a href="{% url 'index' %}">Home</a></h2>
+                {% if user.is_authenticated %}
+                    <h2 class="flow-text">Update your information</h2>
+          <form action="." method="POST" class="padding">
+            {% csrf_token %}
+            <div class="divider"></div>
+            {{ formset.management_form }}
+              {{ formset.as_p }}
+            <button type="submit" class="btn-floating btn-large waves-light waves-effect">
+                <i class="large material-icons">Submit</i>
+            </button>
+            <a href="#" onclick="window.history.back(); return false;" title="Cancel" class="btn-floating waves-effect waves-light red">
+                <i class="material-icons">history</i>
+            </a>
+                {% else %}
+                <p>You're not logged in yet, please
+                    <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
+                    or
+                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
+                </p>
+            {% endif %}
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

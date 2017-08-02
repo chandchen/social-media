@@ -1,10 +1,12 @@
-# Login-System
-How to Use Django's Built-in Login System
+# Login/Profile System
+How to Use Django's Built-in Authentication System
 
 Registration of the following features:
 * Login
 * Logout
 * Sign up
-* Password change
+* Password Change
+* Password Reset(Pending)
 
-* File Upload APP(On hold)
+* File Upload(Image/Video)
+* User Profile

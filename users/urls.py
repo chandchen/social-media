@@ -6,11 +6,14 @@ urlpatterns = [
     url(r'^register/$', core_views.register, name='register'),
     url(r'^login/$', auth_views.login, {'template_name': 'users/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'users/logout.html'}, name='logout'),
+
+    # Change Password
     url(r'^change/$', auth_views.password_change, {'template_name': 'users/change.html',
                                                    'post_change_redirect': 'users:change_done'}, name='change'),
     url(r'^change_done/$', auth_views.password_change_done, {'template_name': 'users/change_done.html'},
         name='change_done'),
 
+    # Reset Password
     url(r'^reset/$', auth_views.password_reset, {'template_name': 'users/registration/reset_form.html',
                                                  'post_reset_redirect': 'users:reset_done'}, name='reset_form'),
     url(r'^reset_done/$', auth_views.password_reset_done, {'template_name': 'users/registration/reset_done.html'},
@@ -20,4 +23,8 @@ urlpatterns = [
                                             'post_reset_redirect': 'users:reset_complete'}, name='reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete,
         {'template_name': 'users/registration/reset_complete.html'}, name='reset_complete'),
+
+    # User Profile
+    url(r'^show_profile/$', core_views.show_profile, name='profile_view'),
+    url(r'^edit_profile/(?P<pk>[\-\w]+)/$', core_views.edit_profile, name='profile_edit'),
 ]
