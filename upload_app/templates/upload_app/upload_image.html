@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Upload - Image</title>
-</head>
-<body>
+{% extends 'users/base.html' %}
+
+{% block content %}
+
     <h3>Upload Image You Want</h3>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="img">
-        <button type="submit">Upload</button>
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
     </form>
 
-</body>
-</html>
+{% endblock %}

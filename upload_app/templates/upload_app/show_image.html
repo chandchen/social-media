@@ -1,3 +1,12 @@
-{% for img in imgs %}
-<img src='{{ img.img.url }}' />
+{% extends 'users/base.html' %}
+
+{% block content %}
+{% for image in images %}
+    <p>
+        <img src="{{ image.image.url }}" height='200' width='200' />
+        <button class="btn btn-default"><a href="{% url 'upload:image_delete' image.id %}">Delete</a></button>
+    </p>
+    <p>Description: {{ image.description }}</p>
+    <p>Publish Date: {{ image.pub_date }}</p>
 {% endfor %}
+{% endblock %}

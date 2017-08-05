@@ -1,0 +1,9 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <h3>Chose Type You Want to Upload:</h3>
+    <p>
+        <button class="btn btn-default"><a href="{% url 'upload:upload_image' %}">Upload Pictures</a></button> -
+        <button class="btn btn-default"><a href="{% url 'upload:upload_file' %}">Upload Files</a></button>
+    </p>
+{% endblock %}

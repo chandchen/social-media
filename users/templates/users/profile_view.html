@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bear Home - Profile</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-center">
+    <div class="container">
+        <div class="flex-center">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <div>
+                <h2 class="logo"><a href="{% url 'index' %}">Home</a></h2>
+                {% if user.is_authenticated %}
+                    <p>Profile about: <a href="#">{{ user.username }}</a></p>
+                    <p><img src="/upload_app/{{ photo }}" height='200' width='200'/></p>
+                    <p>Username: {{ user.username }}</p>
+                    <p>Email: {{ user.email }}</p>
+                    <p>Gender: {{ user.profile.get_gender_display }}</p>
+                    <p>Birthday: {{ user.profile.birthday }}</p>
+                    <p>Bio: {{ user.profile.bio }}</p>
+                    <p>Location: {{ user.profile.location }}</p>
+                    <p>Website: {{ user.profile.website }}</p>
+                    <button class="btn btn-default"><a href="{% url 'users:profile_edit' user.id %}">Update Profile</a></button> -
+                    <button class="btn btn-default"><a href="{% url 'users:change' %}">Change Password</a></button>
+            {% else %}
+                <p>You're not logged in yet, please
+                    <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
+                    or
+                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
+                </p>
+            {% endif %}
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

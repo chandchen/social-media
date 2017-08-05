@@ -1,6 +1,15 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
     <h3>Profile: <em>{{ user.username }}</em></h3>
     <p>Email address: {{ user.email }}</p>
+    <p>
+        <button class="btn btn-default"><a href="{% url 'upload:show_image' %}">Albums</a></button> -
+        <button class="btn btn-default"><a href="{% url 'upload:show_file' %}">Files</a></button> -
+        <button class="btn btn-default"><a href="/upload/">Upload</a></button>
+    </p>
+{% else %}
+
+{% endif %}
 {% endblock %}

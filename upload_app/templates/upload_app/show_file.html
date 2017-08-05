@@ -1,0 +1,12 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+{% for file in files %}
+    <p>
+        <img src="{{ file.file.url }}" height='200' width='200' />
+        <button class="btn btn-default"><a href="{% url 'upload:file_delete' file.id %}">Delete</a></button>
+    </p>
+    <p>Description: {{ file.description }}</p>
+    <p>Publish Date: {{ file.pub_date }}</p>
+{% endfor %}
+{% endblock %}
