@@ -1,16 +1,29 @@
 # Auth/Profile/Upload System
 How to Use Django's Built-in Authentication System
 
-Registration of the following features:
+How to Upload Files With Django
+
+Functions has been achieved of the following features:
+
 * Login
+
 * Logout
+
 * Sign up
+
 * Password Change
+
 * Password Reset(Hold)
 
 * Upload Files(Image/Video)
+
 * User Profile
+
 * Account Settings
+
+* Image Albums
+
+* Files Delete/Trash and Restore
 
 ***
 

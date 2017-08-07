@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <p><button class="btn btn-default"><a href="{% url 'upload:add_album' %}">Add Album</a></button></p>
+{% for album in albums %}
+
+    <p><a href="{% url 'upload:show_image' album.id %}">Album: {{ album.title }}</a></p>
+    <p>Description: {{ album.description }}</p>
+    <p>Published Date: {{ album.pub_date }}</p>
+    <button class="btn btn-default"><a href="{% url 'upload:upload_image' album.id %}">Upload</a></button>
+    <button class="btn btn-default"><a href="{% url 'upload:delete_album' album.id %}">Delete</a></button>
+{% endfor %}
+{% endblock %}

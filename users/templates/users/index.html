@@ -5,9 +5,10 @@
     <h3>Profile: <em>{{ user.username }}</em></h3>
     <p>Email address: {{ user.email }}</p>
     <p>
-        <button class="btn btn-default"><a href="{% url 'upload:show_image' %}">Albums</a></button> -
+        <button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Albums</a></button> -
         <button class="btn btn-default"><a href="{% url 'upload:show_file' %}">Files</a></button> -
-        <button class="btn btn-default"><a href="/upload/">Upload</a></button>
+        <button class="btn btn-default"><a href="{% url 'upload:upload_file' %}">Upload</a></button> -
+        <button class="btn btn-default"><a href="{% url 'upload:trash_detail' %}">Trash</a></button>
     </p>
 {% else %}
 
