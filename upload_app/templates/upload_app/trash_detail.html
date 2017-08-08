@@ -4,6 +4,7 @@
 {% for image in images %}
     <p>
         <img src="{{ image.image.url }}" height='200' width='200' />
+        <button class="btn btn-default"><a href="{% url 'upload:image_delete' image.id %}">Delete</a></button> -
         <button class="btn btn-default"><a href="{% url 'upload:image_restore' image.id %}">Restore</a></button>
     </p>
     <p>Album: {{ image.album.title }}</p>

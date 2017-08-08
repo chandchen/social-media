@@ -4,11 +4,11 @@
 <p>
     <button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Back</a></button>
     <button class="btn btn-default"><a href="{% url 'upload:edit_album' album.id %}">Edit Info</a></button>
+    <button class="btn btn-default"><a href="{% url 'upload:upload_image' album.id %}">Upload</a></button>
 </p>
 {% for image in images %}
     <p>
         <a href="{{ image.image.url }}"><img src="{{ image.image.url }}" height='200' width='200' /></a>
-        <button class="btn btn-default"><a href="{% url 'upload:image_delete' image.id %}">Delete</a></button> -
         <button class="btn btn-default"><a href="{% url 'upload:image_trash' image.id %}">Trash</a></button>
     </p>
     <p>Description: {{ image.description }}</p>

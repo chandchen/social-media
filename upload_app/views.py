@@ -49,7 +49,7 @@ def edit_album(request, album_id):
             form.user = user
             form.pub_date = timezone.now()
             form.save()
-        return HttpResponseRedirect('/upload/show_album/')
+        return HttpResponseRedirect('/upload/show_image/' + album_id)
     else:
         form = AlbumCreateForm(instance=album)
     return render(request, 'upload_app/edit_album.html', {'form': form})
@@ -75,7 +75,7 @@ def upload_image(request, album_id):
             form.album = album
             form.pub_date = timezone.now()
             form.save()
-        return HttpResponseRedirect('/upload/show_album/')
+        return HttpResponseRedirect('/upload/show_image/' + album_id)
     else:
         form = ImageUploadForm()
     return render(request, 'upload_app/upload_image.html', {'form': form, 'username': username})
@@ -94,8 +94,9 @@ def show_image(request, album_id):
 @login_required
 def image_delete(request, image_id):
     image = ImageModel.objects.get(pk=image_id)
+    album_id = str(image.album.id)
     image.delete()
-    return HttpResponseRedirect('/upload/show_album/')
+    return HttpResponseRedirect('/upload/trash_detail/')
 
 
 @login_required
@@ -134,9 +135,10 @@ def file_delete(request, file_id):
 @login_required
 def image_trash(request, image_id):
     image = ImageModel.objects.get(pk=image_id)
+    album_id = str(image.album.id)
     image.status = 0
     image.save()
-    return HttpResponseRedirect('/upload/show_album')
+    return HttpResponseRedirect('/upload/show_image/' + album_id)
 
 
 @login_required
@@ -150,4 +152,4 @@ def image_restore(request, image_id):
     image = ImageModel.objects.get(pk=image_id)
     image.status = 1
     image.save()
-    return HttpResponseRedirect('/upload/show_album')
+    return HttpResponseRedirect('/upload/trash_detail')

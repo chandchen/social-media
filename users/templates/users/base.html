@@ -13,8 +13,7 @@
         <div>
             <h1 class="logo"><a href="{% url 'index' %}">Home</a></h1>
             {% if user.is_authenticated %}
-                <p>Welcome come back: <a href="#">{{ user.username }}</a>!</p>
-                    <p>
+                <p>Welcome come back: <a href="#">{{ user.username }}</a>!
                     <button class="btn btn-default"><a href="{% url 'users:logout' %}">Logout</a></button> -
                     <button class="btn btn-default"><a href="{% url 'users:profile_view' %}">Settings</a></button>
                 </p>
