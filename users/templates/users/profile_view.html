@@ -21,7 +21,7 @@
                 <h2 class="logo"><a href="{% url 'index' %}">Home</a></h2>
                 {% if user.is_authenticated %}
                     <p>Profile about: <a href="#">{{ user.username }}</a></p>
-                    <p><img src="/upload_app/{{ photo }}" height='200' width='200'/></p>
+                    <p><img src="{{ user.profile.photo.url }}" height='200' width='200'/></p>
                     <p>Username: {{ user.username }}</p>
                     <p>Email: {{ user.email }}</p>
                     <p>Gender: {{ user.profile.get_gender_display }}</p>

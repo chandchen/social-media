@@ -27,8 +27,7 @@ def edit_profile(request, pk):
         profile_form = UserProfile(request.POST, request.FILES, instance=request.user.profile)
         if profile_form.is_valid():
             profile_form.save()
-            photo = request.user.profile.photo
-            return render(request, 'users/profile_view.html', {'photo': photo})
+            return redirect('users:profile_view')
     else:
         profile_form = UserProfile(instance=request.user.profile)
     return render(request, 'users/profile_edit.html', {'form': profile_form})

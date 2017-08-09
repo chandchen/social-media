@@ -128,3 +128,5 @@ LOGIN_REDIRECT_URL = 'index'
 MEDIA_URL = '/upload_app/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload_app').replace('\\', '/')
+
+LOGIN_URL = '/users/login/'
