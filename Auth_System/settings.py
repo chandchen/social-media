@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'upload_app',
+    'blog',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,13 @@ MEDIA_URL = '/upload_app/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload_app').replace('\\', '/')
 
 LOGIN_URL = '/users/login/'
+
+EMAIL_HOST = 'smtp.qq.com'
+
+EMAIL_POST = 465
+
+EMAIL_HOST_USER = '13205012@qq.com'
+
+EMAIL_HOST_PASSWORD = 'password'
+
+EMAIL_USE_TLS = True

@@ -1,4 +1,4 @@
-# Auth/Profile/Upload System
+# Auth/Profile/Upload/Blog
 How to Use Django's Built-in Authentication System
 
 How to Upload Files With Django
@@ -25,6 +25,8 @@ Functions has been achieved of the following features:
 
 * Files Delete/Trash and Restore
 
+* Blog Posts
+
 ***
 
 *SNIPPETS:*
@@ -37,3 +39,4 @@ Functions has been achieved of the following features:
 
 [How to Upload Files With Django](https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html)
 
+[Django By Example](https://www.packtpub.com/web-development/django-example)

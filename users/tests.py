@@ -56,6 +56,41 @@ class UsersRegisterTest(TestCase):
         self.assertEqual(response.context['form'].errors, {'password2': [u"The two password fields didn't match."]})
 
 
+class UsersLoginTest(TestCase):
+
+    def setUp(self):
+        User.objects.create_user(username='test', email='test@123.com', password='asd123456')
+
+    def test_login_success(self):
+        body = {
+            'username': 'test',
+            'password': 'asd123456',
+        }
+        response = self.client.post(reverse('users:login'), body)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_login_fail_by_username(self):
+        body = {
+            'username': 'users',
+            'password': 'asd123456',
+        }
+        response = self.client.post(reverse('users:login'), body)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['form'].errors, {'__all__': [u'Please enter a correct username and password. '
+                                                                       u'Note that both fields may be case-sensitive.']})
+
+    def test_login_fail_by_password(self):
+        body = {
+            'username': 'test',
+            'password': 'asd654321',
+        }
+        response = self.client.post(reverse('users:login'), body)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['form'].errors, {'__all__': [u'Please enter a correct username and password. '
+                                                                       u'Note that both fields may be case-sensitive.']})
+
+
 class UsersProfileTest(TestCase):
 
     def setUp(self):

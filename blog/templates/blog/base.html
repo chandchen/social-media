@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+    <style>
+        ul{list-style-type:none;margin:0;padding:0;overflow:hidden;}
+        li{float:left;}
+        a:link,a:visited{display:block;width:120px;text-align:center;}
+    </style>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'upload:show_album' %}">Album</a></li>
+        <li><a href="{% url 'upload:show_file' %}">Media</a></li>
+        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
+    </ul>
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        <h2>My blog</h2>
+            <p>This is my blog.</p>
+    </div>
+</body>
+</html>

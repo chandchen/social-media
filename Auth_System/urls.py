@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='users/index.html'), name='index'),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^upload/', include('upload_app.urls', namespace='upload')),
+    url(r'^blog/', include('blog.urls', namespace='blog')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
