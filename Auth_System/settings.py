@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = 'index'
 
@@ -136,12 +136,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'upload_app').replace('\\', '/')
 
 LOGIN_URL = '/users/login/'
 
+# SMTP SETTING
 EMAIL_HOST = 'smtp.qq.com'
-
 EMAIL_POST = 465
-
 EMAIL_HOST_USER = '13205012@qq.com'
-
 EMAIL_HOST_PASSWORD = 'password'
-
 EMAIL_USE_TLS = True
+
+# CELERY
+BROKER_URL = 'amqp://guest@localhost//'
+CELERY_RESULT_BACKEND = 'amqp://guest@localhost//'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Shanghai'

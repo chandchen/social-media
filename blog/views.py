@@ -4,10 +4,11 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 from django.db.models import Count
 
 from taggit.models import Tag
+from .tasks import send_post_email_task
 
 from .forms import EmailPostForm, CommentForm
 from .models import Post, Comment
@@ -83,7 +84,8 @@ def post_share(request, post_id):
             post_url = request.build_absolute_uri(post.get_absolute_url())
             subject = '{} ({}) recommends you reading "{}" '.format(cd['name'], cd['email'], post.title)
             message = 'Read "{}" at {}\n\n{}\'s comments: {}'.format(post.title, post_url, cd['name'], cd['comments'])
-            send_mail(subject, message, '13205012@qq.com', [cd['to']])
+            send_post_email_task.delay(subject, message, '13205012@qq.com', [cd['to']])
+            # send_mail(subject, message, '13205012@qq.com', [cd['to']])
             sent = True
     else:
         form = EmailPostForm()

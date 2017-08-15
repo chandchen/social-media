@@ -27,6 +27,8 @@ Functions has been achieved of the following features:
 
 * Blog Posts
 
+* Share Posts by Email(Celery Tasks)
+
 ***
 
 *SNIPPETS:*
@@ -40,3 +42,5 @@ Functions has been achieved of the following features:
 [How to Upload Files With Django](https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html)
 
 [Django By Example](https://www.packtpub.com/web-development/django-example)
+
+[Asynchronous Tasks With Django and Celery](https://realpython.com/blog/python/asynchronous-tasks-with-django-and-celery/)
