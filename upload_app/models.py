@@ -19,6 +19,7 @@ class ImageModel(models.Model):
     user = models.ForeignKey(User)
     album = models.ForeignKey(AlbumModel)
     image = models.ImageField(upload_to="upload_file/images/", null=True)
+    name = models.CharField(max_length=255, default='')
     size = models.PositiveIntegerField(default=0)
     description = models.CharField(max_length=200, null=True, blank=True)
     pub_date = models.DateTimeField('published_date', null=True, blank=True)

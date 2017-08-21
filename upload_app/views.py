@@ -74,6 +74,7 @@ def upload_image(request, album_id):
             form.user = user
             form.album = album
             form.size = request.FILES['image'].size
+            form.name = request.FILES['image'].name
             form.pub_date = timezone.now()
             form.save()
             return HttpResponseRedirect('/upload/show_image/' + album_id)
