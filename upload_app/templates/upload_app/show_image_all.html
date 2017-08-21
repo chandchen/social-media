@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<p>
+    <button class="btn btn-default"><a href="{% url 'upload:show_image_all_by_name' %}">sort by name</a></button>
+    <button class="btn btn-default"><a href="{% url 'upload:show_image_all_by_time' %}">sort by time</a></button>
+    <button class="btn btn-default"><a href="{% url 'upload:show_image_all_by_size' %}">sort by size</a></button>
+</p>
+<p> </p>
+{% for image in images %}
+
+        <a href="{{ image.image.url }}"><img src="{{ image.image.url }}" height='150' width='150' /></a>
+        <!--<button class="btn btn-default"><a href="{% url 'upload:image_trash' image.id %}">Trash</a></button>-->
+    <!--{{ image.description }}-->
+    <!--{{ image.pub_date }}-->
+
+{% endfor %}
+{% endblock %}

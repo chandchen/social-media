@@ -73,6 +73,7 @@ def upload_image(request, album_id):
             form = form.save(commit=False)
             form.user = user
             form.album = album
+            form.size = request.FILES['image'].size
             form.pub_date = timezone.now()
             form.save()
             return HttpResponseRedirect('/upload/show_image/' + album_id)
@@ -89,6 +90,42 @@ def show_image(request, album_id):
     images = ImageModel.objects.filter(user=user, album=album, status=1)
     content = {'images': images, 'username': username, 'album': album}
     return render(request, 'upload_app/show_image.html', content)
+
+
+@login_required
+def show_image_all(request):
+    user = request.user
+    username = user.username
+    images = ImageModel.objects.filter(user=user, status=1)
+    return render(request, 'upload_app/show_image_all.html', {'username': username,
+                                                              'images': images, })
+
+
+@login_required
+def show_image_all_by_name(request):
+    user = request.user
+    username = user.username
+    images = ImageModel.objects.filter(user=user, status=1).order_by('description')
+    return render(request, 'upload_app/show_image_all.html', {'username': username,
+                                                              'images': images, })
+
+
+@login_required
+def show_image_all_by_time(request):
+    user = request.user
+    username = user.username
+    images = ImageModel.objects.filter(user=user, status=1).order_by('pub_date')
+    return render(request, 'upload_app/show_image_all.html', {'username': username,
+                                                              'images': images, })
+
+
+@login_required
+def show_image_all_by_size(request):
+    user = request.user
+    username = user.username
+    images = ImageModel.objects.filter(user=user, status=1).order_by('size')
+    return render(request, 'upload_app/show_image_all.html', {'username': username,
+                                                              'images': images, })
 
 
 @login_required

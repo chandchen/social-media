@@ -9,6 +9,12 @@ urlpatterns = [
     url(r'^upload_file', views.upload_file, name='upload_file'),
     url(r'^upload_image/(?P<album_id>[0-9]+)/$', views.upload_image, name='upload_image'),
     url(r'^show_image/(?P<album_id>[0-9]+)/$', views.show_image, name='show_image'),
+    url(r'^show_image/all/$', views.show_image_all, name='show_image_all'),
+
+    url(r'^show_image/all/name$', views.show_image_all_by_name, name='show_image_all_by_name'),
+    url(r'^show_image/all/time$', views.show_image_all_by_time, name='show_image_all_by_time'),
+    url(r'^show_image/all/size$', views.show_image_all_by_size, name='show_image_all_by_size'),
+
     url(r'^show_file/$', views.show_file, name='show_file'),
     url(r'^image_delete/(?P<image_id>[0-9]+)/$', views.image_delete, name='image_delete'),
     url(r'^image_trash/(?P<image_id>[0-9]+)/$', views.image_trash, name='image_trash'),

@@ -6,25 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}Welcome to Chand Home{% endblock %}</title>
     <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
-    <style>
-        ul{list-style-type:none;margin:0;padding:0;overflow:hidden;}
-        li{float:left;}
-        a:link,a:visited{display:block;width:120px;text-align:center;}
-    </style>
-    <ul>
-        <li><button class="btn btn-default"><a href="/">Home</a></button> - </li>
-        <li><button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Album</a></button> - </li>
-        <li><button class="btn btn-default"><a href="{% url 'upload:show_file' %}">Media</a></button> - </li>
-        <li><button class="btn btn-default"><a href="{% url 'blog:post_list' %}">Blog</a></button></li>
-    </ul>
 </head>
 <body>
+
 <div class="flex-center">
     <div class="container">
         <div>
+        <button class="btn btn-default"><a href="/">Home</a></button>
+        <button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Album</a></button>
+        <button class="btn btn-default"><a href="{% url 'upload:show_file' %}">Media</a></button>
+        <button class="btn btn-default"><a href="{% url 'blog:post_list' %}">Blog</a></button>
             {% if user.is_authenticated %}
-            <p>Current user: {{ user.username }}
-
+            <p>Welcome: {{ user.username }}
                     <button class="btn btn-default"><a href="{% url 'users:logout' %}">Logout</a></button> -
                     <button class="btn btn-default"><a href="{% url 'users:profile_view' %}">Settings</a></button>
                 </p>
