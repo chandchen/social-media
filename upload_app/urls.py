@@ -25,4 +25,7 @@ urlpatterns = [
     url(r'^show_album/$', views.show_album, name='show_album'),
     url(r'^delete_album/(?P<album_id>[0-9]+)/$', views.delete_album, name='delete_album'),
     url(r'^edit_album/(?P<album_id>[0-9]+)/$', views.edit_album, name='edit_album'),
+
+    url(r'^encode/(?P<file_id>[0-9]+)/$', views.encode_mp4, name='encode_mp4'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

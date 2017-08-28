@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os, subprocess
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
@@ -8,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import FileUploadForm, ImageUploadForm, AlbumCreateForm
 from .models import FileModel, ImageModel, AlbumModel
+
+from Auth_System import settings
 
 
 @login_required
@@ -135,6 +139,20 @@ def image_delete(request, image_id):
     album_id = str(image.album.id)
     image.delete()
     return HttpResponseRedirect('/upload/trash_detail/')
+
+
+@login_required
+def encode_mp4(request, file_id):
+    video = FileModel.objects.get(pk=file_id)
+    input_file_path = video.file.path
+    filename = os.path.basename(input_file_path)
+    output_file_name = os.path.join('upload_file/file/mp4_480', '{}.avi'.format(filename))
+    output_file_path = os.path.join(settings.MEDIA_ROOT, output_file_name)
+    subprocess.call(['/usr/bin/ffmpeg', '-i', input_file_path, output_file_path])
+    video.mp4_480 = output_file_name
+    video.save(update_fields=['mp4_480'])
+
+    return HttpResponseRedirect('/upload/show_file/')
 
 
 @login_required

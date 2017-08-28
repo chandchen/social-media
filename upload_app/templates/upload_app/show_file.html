@@ -2,11 +2,17 @@
 
 {% block content %}
 {% for file in files %}
-    <p>
-        <img src="{{ file.file.url }}" height='200' width='200' />
+    <!--<p>-->
+        <!--<img src="{{ file.file.url }}" height='200' width='200' />-->
+        <!--<button class="btn btn-default"><a href="{% url 'upload:file_delete' file.id %}">Delete</a></button>-->
+    <!--</p>-->
+    <video width="370px" controls>
+        <source src="{{ file.file.url }}" type="video/mp4">
+        <source src="{{ file.file.url }}" type="video/ogg">
+    </video>
+        <button class="btn btn-default"><a href="{% url 'upload:encode_mp4' file.id %}">Encode</a></button>
         <button class="btn btn-default"><a href="{% url 'upload:file_delete' file.id %}">Delete</a></button>
-    </p>
-    <p>Description: {{ file.description }}</p>
-    <p>Publish Date: {{ file.pub_date }}</p>
+        <p>Description: {{ file.description }}</p>
+        <p>Publish Date: {{ file.pub_date }}</p>
 {% endfor %}
 {% endblock %}
