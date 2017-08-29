@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+    <h1>Description: {{ file.description }}</h1>
+    <p>Publish Date: {{ file.pub_date }}</p>
+
+    <video id="placeholder" width="480px" autoplay controls>
+        <source src="{{ file.file.url }}" type="video/mp4">
+    </video>
+    <p>
+    {% if file.mp4_720 %}
+        <button class="btn btn-default"><a href="{{ file.mp4_720.url }}" onclick="encode(this); return false;">720p</a></button>
+    {% endif %}
+    {% if file.mp4_480 %}
+        <button class="btn btn-default"><a href="{{ file.mp4_480.url }}" onclick="encode(this); return false;">480p</a></button>
+    {% endif %}
+    {% if file.mp4_360 %}
+        <button class="btn btn-default"><a href="{{ file.mp4_360.url }}" onclick="encode(this); return false;">360p</a></button>
+    {% endif %}
+        <button class="btn btn-default"><a href="{% url 'upload:file_delete' file.id %}">Delete</a></button>
+    </p>
+
+{% endblock %}

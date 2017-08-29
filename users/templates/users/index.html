@@ -4,6 +4,7 @@
 {% if user.is_authenticated %}
     <h3>Profile: <em>{{ user.username }}</em></h3>
     <p>Email address: {{ user.email }}</p>
+    <img src="http://pics.sc.chinaz.com/files/pic/pic9/201708/zzpic5855.jpg" height='350' width='250' />
     <p>
         <button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Albums</a></button> -
         <button class="btn btn-default"><a href="{% url 'upload:show_image_all' %}">All Images</a></button> -

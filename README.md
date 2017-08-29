@@ -1,19 +1,17 @@
-# Auth/Profile/Upload/Blog
+# Auth/Profile/Upload/Blog/Media
 How to Use Django's Built-in Authentication System
 
 How to Upload Files With Django
 
 Functions has been achieved of the following features:
 
-* Login
+* Login/Logout
 
-* Logout
-
-* Sign up
+* Registration
 
 * Password Change
 
-* Password Reset(Hold)
+* Password Reset
 
 * Upload Files(Image/Video)
 
@@ -28,6 +26,8 @@ Functions has been achieved of the following features:
 * Blog Posts
 
 * Share Posts by Email(Celery Tasks)
+
+* Video Encode Using Celery(720p, 480p, 360p)
 
 ***
 

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import os, subprocess
-
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
@@ -10,8 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import FileUploadForm, ImageUploadForm, AlbumCreateForm
 from .models import FileModel, ImageModel, AlbumModel
-
-from Auth_System import settings
+from .tasks import transcode_video_task
 
 
 @login_required
@@ -142,20 +139,6 @@ def image_delete(request, image_id):
 
 
 @login_required
-def encode_mp4(request, file_id):
-    video = FileModel.objects.get(pk=file_id)
-    input_file_path = video.file.path
-    filename = os.path.basename(input_file_path)
-    output_file_name = os.path.join('upload_file/file/mp4_480', '{}.avi'.format(filename))
-    output_file_path = os.path.join(settings.MEDIA_ROOT, output_file_name)
-    subprocess.call(['/usr/bin/ffmpeg', '-i', input_file_path, output_file_path])
-    video.mp4_480 = output_file_name
-    video.save(update_fields=['mp4_480'])
-
-    return HttpResponseRedirect('/upload/show_file/')
-
-
-@login_required
 def upload_file(request):
     user = request.user
     username = user.username
@@ -166,6 +149,10 @@ def upload_file(request):
             form.user = user
             form.pub_date = timezone.now()
             form.save()
+            file_id = FileModel.objects.get(file=form.file).id
+            transcode_video_task.delay(file_id, hd='320x240')
+            transcode_video_task.delay(file_id, hd='hd480')
+            transcode_video_task.delay(file_id, hd='hd720')
             return HttpResponseRedirect('/upload/show_file/')
     else:
         form = FileUploadForm()
@@ -179,6 +166,15 @@ def show_file(request):
     files = FileModel.objects.filter(user=user)
     content = {'files': files, 'username': username}
     return render(request, 'upload_app/show_file.html', content)
+
+
+@login_required
+def show_file_detail(request, file_id):
+    user = request.user
+    username = user.username
+    file = FileModel.objects.get(pk=file_id)
+    content = {'file': file, 'username': username}
+    return render(request, 'upload_app/show_file_detail.html', content)
 
 
 @login_required

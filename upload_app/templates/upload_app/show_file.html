@@ -1,18 +1,18 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
+<h3 style="color:red">******** You have {{ files.count }} videos ********</h3>
+<p>   </p>
 {% for file in files %}
-    <!--<p>-->
-        <!--<img src="{{ file.file.url }}" height='200' width='200' />-->
-        <!--<button class="btn btn-default"><a href="{% url 'upload:file_delete' file.id %}">Delete</a></button>-->
-    <!--</p>-->
-    <video width="370px" controls>
+<div>
+    <video id="placeholder" width="370px" controls>
         <source src="{{ file.file.url }}" type="video/mp4">
-        <source src="{{ file.file.url }}" type="video/ogg">
+        <!--<source src="{{ file.file.url }}" type="video/ogg">-->
     </video>
-        <button class="btn btn-default"><a href="{% url 'upload:encode_mp4' file.id %}">Encode</a></button>
+    <p><strong>{{ file.description }}</strong> <small><em style="color:gray">Published {{ file.pub_date }}</em></small></p>
+        <button class="btn btn-default"><a href="{% url 'upload:show_file_detail' file.id %}">Watch Full Video</a></button>
         <button class="btn btn-default"><a href="{% url 'upload:file_delete' file.id %}">Delete</a></button>
-        <p>Description: {{ file.description }}</p>
-        <p>Publish Date: {{ file.pub_date }}</p>
+    <p> </p>
+</div>
 {% endfor %}
 {% endblock %}
