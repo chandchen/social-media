@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import FileUploadForm, ImageUploadForm, AlbumCreateForm
 from .models import FileModel, ImageModel, AlbumModel
-from .tasks import transcode_video_task
+from .tasks import transcode_video_task, generate_thumbnail_task
 
 
 @login_required
@@ -150,7 +150,8 @@ def upload_file(request):
             form.pub_date = timezone.now()
             form.save()
             file_id = FileModel.objects.get(file=form.file).id
-            transcode_video_task.delay(file_id, hd='320x240')
+            generate_thumbnail_task.delay(file_id)
+            transcode_video_task.delay(file_id, hd='640X360')
             transcode_video_task.delay(file_id, hd='hd480')
             transcode_video_task.delay(file_id, hd='hd720')
             return HttpResponseRedirect('/upload/show_file/')
@@ -166,6 +167,15 @@ def show_file(request):
     files = FileModel.objects.filter(user=user)
     content = {'files': files, 'username': username}
     return render(request, 'upload_app/show_file.html', content)
+
+
+@login_required
+def show_file_list(request):
+    user = request.user
+    username = user.username
+    files = FileModel.objects.filter(user=user)
+    content = {'files': files, 'username': username}
+    return render(request, 'upload_app/show_file_list.html', content)
 
 
 @login_required

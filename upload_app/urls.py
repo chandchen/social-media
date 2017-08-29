@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^show_image/all/size$', views.show_image_all_by_size, name='show_image_all_by_size'),
 
     url(r'^show_file/$', views.show_file, name='show_file'),
+    url(r'^show_file_list/$', views.show_file_list, name='show_file_list'),
     url(r'^show_file_detail/(?P<file_id>[0-9]+)/$', views.show_file_detail, name='show_file_detail'),
 
     url(r'^image_delete/(?P<image_id>[0-9]+)/$', views.image_delete, name='image_delete'),
