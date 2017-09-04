@@ -4,35 +4,44 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
     <title>{% block title %}Welcome to Chand Home{% endblock %}</title>
-    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">-->
+    <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'styles/style.css' %}" rel="stylesheet">
 </head>
 <body>
-
-<div class="flex-center">
-    <div class="container">
-        <div>
-        <button class="btn btn-default"><a href="/">Home</a></button>
-        <button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Album</a></button>
-        <button class="btn btn-default"><a href="{% url 'upload:show_file' %}">Media</a></button>
-        <button class="btn btn-default"><a href="{% url 'blog:post_list' %}">Blog</a></button>
-            {% if user.is_authenticated %}
-            <p>Welcome: {{ user.username }}
-                    <button class="btn btn-default"><a href="{% url 'users:logout' %}">Logout</a></button> -
-                    <button class="btn btn-default"><a href="{% url 'users:profile_view' %}">Settings</a></button>
-                </p>
-            {% else %}
-                <p>You're not logged in yet, please
-                    <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
-                    or
-                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
-                </p>
-            {% endif %}
-        </div>
-        {% block content %}{% endblock %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation"><a href="{% url 'upload:show_image_all' %}">Gallery</a></li>
+        <li role="presentation"><a href="{% url 'upload:show_album' %}">Album</a></li>
+        <li role="presentation" ><a href="{% url 'upload:show_file' %}">Media</a></li>
+        <li role="presentation" ><a href="{% url 'upload:trash_detail' %}">Trash</a></li>
+        <li role="presentation" ><a href="{% url 'blog:post_list' %}">Blog</a></li>
+    </ul>
+    <p></p>
+    {% if user.is_authenticated %}
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle "  data-toggle="dropdown">
+         {{ user.username }}<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="{% url 'users:profile_view' %}">Your profile</a></li>
+          <li role="presentation"><a href="#">Your stars</a></li>
+            <li role="presentation" class="divider"></li>
+          <li role="presentation"><a href="{% url 'users:profile_view' %}">Settings</a></li>
+          <li role="presentation"><a href="{% url 'users:logout' %}">Sing out</a></li>
+        </ul>
     </div>
-</div>
-<script type="text/javascript" src="{% static 'scripts/encode.js' %}"></script>
+    {% else %}
+        <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
+        or
+        <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
+    {% endif %}
+    <p></p>
+{% block content %}{% endblock %}
+    <script type="text/javascript" src="{% static 'scripts/encode.js' %}"></script>
+    <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 </body>
 </html>

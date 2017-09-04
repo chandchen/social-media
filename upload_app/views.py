@@ -99,8 +99,10 @@ def show_image_all(request):
     user = request.user
     username = user.username
     images = ImageModel.objects.filter(user=user, status=1)
+    files = FileModel.objects.filter(user=user)
     return render(request, 'upload_app/show_image_all.html', {'username': username,
-                                                              'images': images, })
+                                                              'images': images,
+                                                              'files': files, })
 
 
 @login_required

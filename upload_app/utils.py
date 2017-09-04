@@ -54,7 +54,7 @@ def generate_thumbnail(file_id):
     output_image_name = os.path.join('upload_file/file/thumbnail/', '{}.jpg'.format(filename))
     output_image_path = os.path.join(settings.MEDIA_ROOT, output_image_name)
     subprocess.call(['/usr/bin/ffmpeg', '-i', input_file_path, '-y', '-f',
-                     'image2', '-ss', '10', '-t', '0.001', '-s', '320*240', output_image_path])
+                     'image2', '-ss', '10', '-t', '0.001', '-s', '640X360', output_image_path])
 
     file.thumbnail = output_image_name
     file.save(update_fields=['thumbnail'])

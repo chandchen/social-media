@@ -15,7 +15,7 @@ class Profile(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.FileField(verbose_name='Profile Picture', upload_to='upload_file/users',
-                             max_length=255, null=True, blank=True)
+                             max_length=255, null=True, blank=True, default='#')
     gender = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
     bio = models.CharField(max_length=200, blank=True)
     location = models.CharField(max_length=30, blank=True)

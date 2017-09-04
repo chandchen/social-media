@@ -2,10 +2,11 @@
 
 {% block content %}
 <h3 style="color:red">******** You have {{ files.count }} videos ********</h3>
+<button class="btn btn-default"><a href="{% url 'upload:upload_file' %}">Upload Videos</a></button>
 <p>   </p>
 {% for file in files %}
 <div>
-    <video id="placeholder" width="370px" controls>
+    <video id="placeholder" width="370px" controls poster="{{ file.thumbnail.url }}">
         <source src="{{ file.file.url }}" type="video/mp4">
         <!--<source src="{{ file.file.url }}" type="video/ogg">-->
     </video>

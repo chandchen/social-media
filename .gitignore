@@ -1,5 +1,7 @@
 */__pycache__/
 *.pyc
+/.idea/
 migrations
 upload_file
 db.sqlite3
+celerybeat-schedule

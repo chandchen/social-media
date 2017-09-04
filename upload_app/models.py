@@ -35,7 +35,7 @@ class FileModel(models.Model):
     mp4_360 = models.FileField(upload_to="upload_file/file/mp4_360", blank=True, null=True)
     mp4_480 = models.FileField(upload_to="upload_file/file/mp4_480", blank=True, null=True)
     mp4_720 = models.FileField(upload_to="upload_file/file/mp4_720", blank=True, null=True)
-    thumbnail = models.ImageField(upload_to="upload_file/file/thumbnail", blank=True, null=True)
+    thumbnail = models.ImageField(upload_to="upload_file/file/thumbnail", blank=True, null=True, default=' ')
 
     description = models.CharField(max_length=200, null=True, blank=True)
     pub_date = models.DateTimeField('published_date', null=True, blank=True)

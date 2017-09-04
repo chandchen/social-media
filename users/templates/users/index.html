@@ -1,22 +1,74 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    <h3>Profile: <em>{{ user.username }}</em></h3>
-    <p>Email address: {{ user.email }}</p>
-    <img src="http://pics.sc.chinaz.com/files/pic/pic9/201708/zzpic5855.jpg" height='350' width='250' />
-    <p>
-        <button class="btn btn-default"><a href="{% url 'upload:show_album' %}">Albums</a></button> -
-        <button class="btn btn-default"><a href="{% url 'upload:show_image_all' %}">All Images</a></button> -
-        <button class="btn btn-default"><a href="{% url 'upload:show_file' %}">Files</a></button> -
-        <button class="btn btn-default"><a href="{% url 'upload:show_file_list' %}">Files List</a></button> -
-        <button class="btn btn-default"><a href="{% url 'upload:upload_file' %}">Upload Files</a></button>
-    </p>
-    <p>
-        <button class="btn btn-default"><a href="{% url 'upload:trash_detail' %}">Trash</a></button>
-    </p>
 
-{% else %}
+<p> </p>
+<div class="jumbotron">
+  <div class="container" align="center">
+      <h2 class="text-info" style="font-family:arial;font-weight:bold;font-size:49px">CHAND</h2>
+      <br>
+      <div class="text-muted">Share life style with the worldwide</div>
+      <br>
+      <br>
+      <p><a role="button" href="#" class="btn btn-success">Sing up</a></p>
+  </div>
+</div>
 
-{% endif %}
+<style>
+p{
+  margin-left:10px;
+  margin-top:10px;
+}
+</style>
+<ul id="myTab" class="nav nav-tabs">
+   <li class="active"><a href="#gallery" data-toggle="tab">Gallery</a></li>
+   <li><a href="#media" data-toggle="tab">Media</a></li>
+   <li class="dropdown">
+      <a href="#" id="myTabDrop1" class="dropdown-toggle"
+         data-toggle="dropdown">Other Apps
+         <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+         <li><a href="#trash" tabindex="-1" data-toggle="tab">Trash</a></li>
+         <li><a href="#blog" tabindex="-1" data-toggle="tab">Blog</a></li>
+      </ul>
+   </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+   <div class="tab-pane fade in active" id="gallery">
+      <p>An art museum or art gallery is a building or space for the exhibition of art,
+          usually visual art. Museums can be public or private, but what distinguishes a
+          museum is the ownership of a collection. Paintings are the most commonly
+          displayed art objects; however, sculptures, decorative arts, furniture, textiles,
+          costumes, drawings, pastels, watercolors, collages, prints, artist's books, photographs,
+          and installation art are also regularly shown.[1] Although primarily concerned with
+          providing a space to show works of visual art, art galleries are sometimes used to
+          host other artistic activities, such as performance arts, music concerts, or poetry readings.</p>
+   </div>
+   <div class="tab-pane fade" id="media">
+      <p>Multimedia can be recorded and played, displayed, interacted with or accessed by
+          information content processing devices, such as computerized and electronic devices,
+          but can also be part of a live performance. Multimedia devices are electronic media
+          devices used to store and experience multimedia content. Multimedia is distinguished
+          from mixed media in fine art; for example, by including audio it has a broader scope.
+          The term "rich media" is synonymous with interactive multimedia.</p>
+   </div>
+   <div class="tab-pane fade" id="trash">
+      <p>In computing, the trash (also known as the recycle bin and by other names) is temporary
+          storage for files that have been deleted in a file manager by the user, but not yet
+          permanently erased from the file system. Typically, a recycle bin is presented as a special
+          file directory to the user (whether or not it is actually a single directory depends on the
+          implementation), allowing the user to browse deleted files, undelete those that were deleted
+          by mistake, or delete them permanently (either one by one, or by the "Empty Trash" function).</p>
+   </div>
+   <div class="tab-pane fade" id="blog">
+      <p>A blog (a truncation of the expression "weblog")[1] is a discussion or informational website
+          published on the World Wide Web consisting of discrete, often informal diary-style text entries
+          ("posts"). Posts are typically displayed in reverse chronological order, so that the most recent
+          post appears first, at the top of the web page. Until 2009, blogs were usually the work of a single </p>
+   </div>
+</div>
+
+<div style="height:200px"></div>
+
 {% endblock %}

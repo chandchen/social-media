@@ -8,11 +8,11 @@
 </p>
 <p> </p>
 {% for image in images %}
-
-        <a href="{{ image.image.url }}"><img src="{{ image.image.url }}" height='150' width='150' /></a>
-        <!--<button class="btn btn-default"><a href="{% url 'upload:image_trash' image.id %}">Trash</a></button>-->
-    <!--{{ image.description }}-->
-    <!--{{ image.pub_date }}-->
-
+    <a href="{{ image.image.url }}"><img src="{{ image.image.url }}" height='180' width='240' /></a>
 {% endfor %}
+
+{% for file in files %}
+    <a href="{% url 'upload:show_file_detail' file.id %}"><img src="{{ file.thumbnail.url }}" height='180' width='240' /></a>
+{% endfor %}
+
 {% endblock %}
