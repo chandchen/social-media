@@ -12,16 +12,19 @@
     <link href="{% static 'styles/style.css' %}" rel="stylesheet">
 </head>
 <body>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="/">Home</a></li>
-        <li role="presentation"><a href="{% url 'upload:show_image_all' %}">Gallery</a></li>
-        <li role="presentation"><a href="{% url 'upload:show_album' %}">Album</a></li>
-        <li role="presentation" ><a href="{% url 'upload:show_file' %}">Media</a></li>
-        <li role="presentation" ><a href="{% url 'upload:trash_detail' %}">Trash</a></li>
-        <li role="presentation" ><a href="{% url 'blog:post_list' %}">Blog</a></li>
-    </ul>
-    <p></p>
-    {% if user.is_authenticated %}
+
+<style>
+  body{
+    padding-top:50px;
+  }
+</style>
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="navbar-text pull-left">
+    <h5>CHAND'S FIRST WEBSITE</h5>
+</div>
+
+<div class="navbar-text pull-right">
+       {% if user.is_authenticated %}
     <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle "  data-toggle="dropdown">
          {{ user.username }}<span class="caret"></span>
@@ -39,6 +42,20 @@
         or
         <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
     {% endif %}
+</div>
+
+</nav>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation"><a href="{% url 'upload:show_image_all' %}">Gallery</a></li>
+        <li role="presentation"><a href="{% url 'upload:show_album' %}">Album</a></li>
+        <li role="presentation" ><a href="{% url 'upload:show_file' %}">Media</a></li>
+        <li role="presentation" ><a href="{% url 'upload:trash_detail' %}">Trash</a></li>
+        <li role="presentation" ><a href="{% url 'blog:post_list' %}">Blog</a></li>
+    </ul>
+    <p></p>
+
     <p></p>
 {% block content %}{% endblock %}
     <script type="text/javascript" src="{% static 'scripts/encode.js' %}"></script>

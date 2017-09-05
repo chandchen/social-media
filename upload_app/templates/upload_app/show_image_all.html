@@ -1,19 +1,20 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<p>
-    <button class="btn btn-default"><a href="{% url 'upload:show_image_all_by_name' %}">sort by name</a></button>
-    <button class="btn btn-default"><a href="{% url 'upload:show_image_all_by_time' %}">sort by time</a></button>
-    <button class="btn btn-default"><a href="{% url 'upload:show_image_all_by_size' %}">sort by size</a></button>
-</p>
-<p> </p>
 
+<div class="btn-group" role="group" aria-label="web">
+  <button type="button" class="btn btn-default"><a href="{% url 'upload:show_image_all_by_name' %}">Sort by name</a></button>
+  <button type="button" class="btn btn-default"><a href="{% url 'upload:show_image_all_by_time' %}">Sort by time</a></button>
+  <button type="button" class="btn btn-default"><a href="{% url 'upload:show_image_all_by_size' %}">Sort by size</a></button>
+</div>
+
+<p></p>
 <div class="container">
     <div class="row">
     {% for image in images %}
         <div class="col-xs-3 ">
             <a href="{{ image.image.url }}" class="thumbnail">
-                <img src="{{ image.image.url }}" style="width:100%">
+                <img src="{{ image.image.url }}" style="width:240px;height:160px">
             </a>
             <div class="caption">
                 <div class="text-muted">{{ image.name }}</div>
@@ -26,7 +27,7 @@
     {% for file in files %}
         <div class="col-xs-3 ">
             <a href="{% url 'upload:show_file_detail' file.id %}" class="thumbnail">
-                <img src="{{ file.thumbnail.url }}" height='180' width='240'>
+                <img src="{{ file.thumbnail.url }}" style="width:240px;height:160px">
             </a>
             <div class="caption">
                 <div class="text-muted">{{ file.description }}</div>
@@ -37,15 +38,6 @@
     {% endfor %}
     </div>
 </div>
-
-<!--{% for image in images %}-->
-    <!--<a href="{{ image.image.url }}"><img src="{{ image.image.url }}" height='180' width='240' /></a>-->
-<!--{% endfor %}-->
-
-<!--{% for file in files %}-->
-    <!--<a href="{% url 'upload:show_file_detail' file.id %}"><img src="{{ file.thumbnail.url }}" height='180' width='240' /></a>-->
-<!--{% endfor %}-->
-
 {% endblock %}
 
 
