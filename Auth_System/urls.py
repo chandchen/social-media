@@ -18,6 +18,9 @@ urlpatterns = [
     url(r'^upload/', include('upload_app.urls', namespace='upload')),
     url(r'^blog/', include('blog.urls', namespace='blog')),
 
+    url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
     url(r'sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 
