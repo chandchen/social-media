@@ -8,28 +8,34 @@
     <div class="container">
         <div class="">
             <div class="unit-1-2 unit-3-on-mobile">
-                <div>
-                {% if user.is_authenticated %}
-                    <p><img src="{{ user.profile.photo.url }}" height='200' width='200'/></p>
-                    <p>Username: {{ user.username }}</p>
-                    <p>Email: {{ user.email }}</p>
-                    <p>Gender: {{ user.profile.get_gender_display }}</p>
-                    <p>Birthday: {{ user.profile.birthday }}</p>
-                    <p>Bio: {{ user.profile.bio }}</p>
-                    <p>Location: {{ user.profile.location }}</p>
-                    <p>Website: {{ user.profile.website }}</p>
-                    <button class="btn btn-default"><a href="{% url 'users:profile_edit' user.id %}">Update Profile</a></button> -
-                    <button class="btn btn-default"><a href="{% url 'users:change' %}">Password</a></button>
-            {% else %}
-                <p>You're not logged in yet, please
-                    <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
-                    or
-                    <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
-                </p>
-            {% endif %}
-        </div>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-info"   style="width: 60%">
+                    Complete 60%
+                  </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-xs-9"><h3>Your Profile</h3></div>
+                  <div class="col-xs-4">
+                    <img src="{{ profile.photo.url }}" class="img-thumbnail" style="width:180px;height:180px;"/>
+                  </div>
+                  <div class="col-xs-6">
+                      <ul style="list-style-type:none">
+                          <li>Username: {{ user.username }}</li>
+                          <li>Email: {{ user.email }}</li>
+                          <li>Gender: {{ profile.get_gender_display }}</li>
+                          <li>Birthday: {{ profile.birthday }}</li>
+                          <li>Bio: {{ profile.bio }}</li>
+                          <li>Location: {{ profile.location }}</li>
+                          <li>Website: {{ profile.website }}</li>
+                        </ul>
+                  </div>
+                    <p></p>
+                </div>
+                    <button class="btn btn-info btn-sm"><a href="{% url 'users:profile_edit' user.id %}">Edit</a></button>
+                    <button class="btn btn-default btn-sm"><a href="{% url 'users:change' %}">Change Password</a></button>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

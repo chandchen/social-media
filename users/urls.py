@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from . import views as core_views
+from . import views
 
 urlpatterns = [
-    url(r'^register/$', core_views.register, name='register'),
+    url(r'^register/$', views.RegisterView.as_view(), name='register'),
     url(r'^login/$', auth_views.login, {'template_name': 'users/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'users/logout.html'}, name='logout'),
 
@@ -25,6 +25,6 @@ urlpatterns = [
         {'template_name': 'users/registration/reset_complete.html'}, name='reset_complete'),
 
     # User Profile
-    url(r'^show_profile/$', core_views.show_profile, name='profile_view'),
-    url(r'^edit_profile/(?P<pk>[\-\w]+)/$', core_views.edit_profile, name='profile_edit'),
+    url(r'^profile/(?P<pk>\d+)/$', views.ProfileView.as_view(), name='profile_view'),
+    url(r'^profile/(?P<pk>\d+)/edit/$', views.ProfileEditView.as_view(), name='profile_edit'),
 ]

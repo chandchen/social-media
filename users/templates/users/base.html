@@ -18,34 +18,9 @@
     padding-top:50px;
   }
 </style>
+
 <nav class="navbar navbar-default navbar-fixed-top">
 <div class="navbar-text pull-left">
-    <h5>CHAND'S FIRST WEBSITE</h5>
-</div>
-
-<div class="navbar-text pull-right">
-       {% if user.is_authenticated %}
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle "  data-toggle="dropdown">
-         {{ user.username }}<span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="{% url 'users:profile_view' %}">Your profile</a></li>
-          <li role="presentation"><a href="#">Your stars</a></li>
-            <li role="presentation" class="divider"></li>
-          <li role="presentation"><a href="{% url 'users:profile_view' %}">Settings</a></li>
-          <li role="presentation"><a href="{% url 'users:logout' %}">Sing out</a></li>
-        </ul>
-    </div>
-    {% else %}
-        <button class="btn btn-default"><a href="{% url 'users:login' %}">Sign in</a></button>
-        or
-        <button class="btn btn-default"><a href="{% url 'users:register' %}">Sign up</a></button>
-    {% endif %}
-</div>
-
-</nav>
-
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="/">Home</a></li>
         <li role="presentation"><a href="{% url 'upload:show_image_all' %}">Gallery</a></li>
@@ -54,9 +29,28 @@
         <li role="presentation" ><a href="{% url 'upload:trash_detail' %}">Trash</a></li>
         <li role="presentation" ><a href="{% url 'blog:post_list' %}">Blog</a></li>
     </ul>
-    <p></p>
+</div>
+    <div class="navbar-text pull-right">
+        {% if user.is_authenticated %}
+        <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+            <li>
+                <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="glyphicon glyphicon-user"></i> {{ user.username }}
+                       <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul id="systemSetting" class="nav nav-list collapse secondmenu" style="height: 0px;">
+                    <li><a href="{% url 'users:profile_view' user.id %}" onclick="menuClick('${base}toViewInfo?id=${s.id}')"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+                    <li><a href="{% url 'users:logout' %}" onclick="menuClick('${base}toTestList')"><i class="glyphicon glyphicon-off"></i> Sign out</a></li>
+                </ul>
+            </li>
+        </ul>
+        {% else %}
+            <a href="{% url 'users:login' %}" ><i class="glyphicon glyphicon-map-marker"></i> Sign in </a>
+            <a href="{% url 'users:register' %}" ><i class="glyphicon glyphicon-map-marker"></i> Sign up </a>
+        {% endif %}
+    </div>
+</nav>
 
-    <p></p>
 {% block content %}{% endblock %}
     <script type="text/javascript" src="{% static 'scripts/encode.js' %}"></script>
     <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>

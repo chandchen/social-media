@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^api/', include('api.urls', namespace='api')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
+    url(r'api/users/', include('users.api.urls', namespace='users-api')),
+
     url(r'sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 
