@@ -1,6 +1,6 @@
 {% extends 'users/base.html' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Your Profile{% endblock %}
 
 {% block content %}
 
@@ -13,26 +13,50 @@
                     Complete 60%
                   </div>
                 </div>
-
                 <div class="row">
                     <div class="col-xs-9"><h3>Your Profile</h3></div>
                   <div class="col-xs-4">
                     <img src="{{ profile.photo.url }}" class="img-thumbnail" style="width:180px;height:180px;"/>
                   </div>
                   <div class="col-xs-6">
-                      <ul style="list-style-type:none">
-                          <li>Username: {{ user.username }}</li>
-                          <li>Email: {{ user.email }}</li>
-                          <li>Gender: {{ profile.get_gender_display }}</li>
-                          <li>Birthday: {{ profile.birthday }}</li>
-                          <li>Bio: {{ profile.bio }}</li>
-                          <li>Location: {{ profile.location }}</li>
-                          <li>Website: {{ profile.website }}</li>
-                        </ul>
+
+                      <div class="panel panel-success">
+                          <div class="panel-heading"><strong>Name: {{ user.username }}</strong></div>
+                      <div class="panel-body">
+
+                    <table class="table">
+                  <tbody>
+                     <tr>
+                        <td><strong>Email Address: </strong></td>
+                        <td>{{ user.email }}</td>
+                     </tr>
+                 <tr>
+                        <td><strong>Gender: </strong></td>
+                        <td>{{ profile.get_gender_display }}</td>
+                     </tr>
+                 <tr>
+                        <td><strong>Birthday: </strong></td>
+                        <td>{{ profile.birthday }}</td>
+                     </tr>
+                   <tr>
+                        <td><strong>Biography: </strong></td>
+                        <td>{{ profile.bio }}</td>
+                     </tr>
+                   <tr>
+                        <td><strong>Location: </strong></td>
+                        <td>{{ profile.location }}</td>
+                     </tr>
+                   <tr>
+                        <td><strong>Website: </strong></td>
+                        <td>{{ profile.website }}</td>
+                     </tr>
+                  </tbody>
+                </table>
+                      </div>
+                    </div>
                   </div>
-                    <p></p>
                 </div>
-                    <button class="btn btn-info btn-sm"><a href="{% url 'users:profile_edit' user.id %}">Edit</a></button>
+                    <button class="btn btn-default btn-sm"><a href="{% url 'users:profile_edit' user.id %}">Update profile</a></button>
                     <button class="btn btn-default btn-sm"><a href="{% url 'users:change' %}">Change Password</a></button>
             </div>
         </div>

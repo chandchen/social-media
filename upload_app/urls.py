@@ -5,7 +5,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.upload),
     url(r'^upload_file', views.upload_file, name='upload_file'),
 
     # url(r'^upload_image/(?P<album_id>[0-9]+)/$', views.upload_image, name='upload_image'),
@@ -27,7 +26,7 @@ urlpatterns = [
     url(r'^show_file_list/$', views.show_file_list, name='show_file_list'),
     url(r'^show_file_detail/(?P<file_id>[0-9]+)/$', views.show_file_detail, name='show_file_detail'),
 
-    url(r'^image_delete/(?P<image_id>[0-9]+)/$', views.image_delete, name='image_delete'),
+    url(r'^image_delete/(?P<image_id>[0-9]+)/$', views.ImageDeleteView.as_view(), name='image_delete'),
     url(r'^image_trash/(?P<image_id>[0-9]+)/$', views.image_trash, name='image_trash'),
     url(r'^image_restore/(?P<image_id>[0-9]+)/$', views.image_restore, name='image_restore'),
     url(r'^trash_detail/$', views.trash_detail, name='trash_detail'),

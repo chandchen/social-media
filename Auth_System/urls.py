@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 
+    url('', include('social_django.urls', namespace='social')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

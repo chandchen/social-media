@@ -1,6 +1,8 @@
 */__pycache__/
 *.pyc
 /.idea/
+.env
+2017
 migrations
 upload_file
 db.sqlite3

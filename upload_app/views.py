@@ -12,11 +12,8 @@ from .tasks import transcode_video_task, generate_thumbnail_task
 
 from django.views.generic import TemplateView, FormView, View
 from django.core.urlresolvers import reverse_lazy
-
-
-@login_required
-def upload(request):
-    return render(request, 'upload_app/upload.html')
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 
 
 # @login_required
@@ -35,11 +32,12 @@ def upload(request):
 #     return render(request, 'upload_app/add_album.html', {'form': form})
 
 
-class AddAlbumView(FormView):
+class AddAlbumView(LoginRequiredMixin, FormView):
     form_class = AlbumCreateForm
     success_url = reverse_lazy('upload:show_album')
     template_name = 'upload_app/add_album.html'
 
+    @classmethod
     def post(self, request, *args, **kwargs):
         form = AlbumCreateForm(request.POST)
         if form.is_valid():
@@ -67,6 +65,10 @@ class ShowAlbumView(TemplateView):
         context['albums'] = albums
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ShowAlbumView, self).dispatch(*args, **kwargs)
+
 
 # @login_required
 # def edit_album(request, album_id):
@@ -85,15 +87,17 @@ class ShowAlbumView(TemplateView):
 #     return render(request, 'upload_app/edit_album.html', {'form': form})
 
 
-class EditAlbumView(View):
+class EditAlbumView(LoginRequiredMixin, View):
     form_class = AlbumCreateForm
     template_name = 'upload_app/edit_album.html'
 
+    @classmethod
     def get(self, request, *args, **kwargs):
         album = AlbumModel.objects.get(pk=kwargs.get("album_id"))
         form = self.form_class(instance=album)
         return render(request, self.template_name, {'form': form})
 
+    @classmethod
     def post(self, request, *args, **kwargs):
         album = AlbumModel.objects.get(pk=kwargs.get("album_id"))
         form = self.form_class(request.POST, instance=album)
@@ -113,8 +117,9 @@ class EditAlbumView(View):
 #     return HttpResponseRedirect('/upload/show_album/')
 
 
-class DeleteAlbumView(View):
+class DeleteAlbumView(LoginRequiredMixin, View):
 
+    @classmethod
     def get(self, request, *args, **kwargs):
         AlbumModel.objects.get(pk=kwargs.get("album_id")).delete()
         return HttpResponseRedirect('/upload/show_album/')
@@ -141,15 +146,17 @@ class DeleteAlbumView(View):
 #     return render(request, 'upload_app/upload_image.html', {'form': form, 'username': username})
 
 
-class UploadImageView(View):
+class UploadImageView(LoginRequiredMixin, View):
     form_class = ImageUploadForm
     template_name = 'upload_app/upload_image.html'
 
+    @classmethod
     def get(self, request, *args, **kwargs):
         album = AlbumModel.objects.get(pk=kwargs.get("album_id"))
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
+    @classmethod
     def post(self, request, *args, **kwargs):
         user = request.user
         username = user.username
@@ -191,6 +198,10 @@ class ShowImageView(TemplateView):
         context['album'] = album
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ShowImageView, self).dispatch(*args, **kwargs)
+
 
 # @login_required
 # def show_image_all(request):
@@ -216,6 +227,10 @@ class ShowImageAllView(TemplateView):
         context['images'] = images
         context['files'] = files
         return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ShowImageAllView, self).dispatch(*args, **kwargs)
 
 
 @login_required
@@ -245,12 +260,21 @@ def show_image_all_by_size(request):
                                                               'images': images, })
 
 
-@login_required
-def image_delete(request, image_id):
-    image = ImageModel.objects.get(pk=image_id)
-    album_id = str(image.album.id)
-    image.delete()
-    return HttpResponseRedirect('/upload/trash_detail/')
+# @login_required
+# def image_delete(request, image_id):
+#     image = ImageModel.objects.get(pk=image_id)
+#     album_id = str(image.album.id)
+#     image.delete()
+#     return HttpResponseRedirect('/upload/trash_detail/')
+
+
+class ImageDeleteView(LoginRequiredMixin, View):
+
+    @classmethod
+    def get(self, request, *args, **kwargs):
+        image = ImageModel.objects.get(pk=kwargs.get('image_id'))
+        image.delete()
+        return HttpResponseRedirect('/upload/trash_detail/')
 
 
 @login_required
@@ -295,6 +319,10 @@ class ShowFileView(TemplateView):
         context['username'] = username
         context['files'] = files
         return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ShowFileView, self).dispatch(*args, **kwargs)
 
 
 @login_required

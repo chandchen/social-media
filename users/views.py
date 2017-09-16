@@ -79,7 +79,6 @@ class ProfileEditView(LoginRequiredMixin, View):
     @classmethod
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES, instance=request.user.profile)
-
         if form.is_valid():
             form.save()
             return redirect('users:profile_view', request.user.id)

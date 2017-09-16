@@ -1,4 +1,4 @@
-# Auth/Profile/Upload/Blog/Media
+# Build a Social Media Website Application
 How to Use Django's Built-in Authentication System
 
 How to Upload Files With Django
@@ -29,9 +29,13 @@ Functions has been achieved of the following features:
 
 * Video Encode Using Celery(720p, 480p, 360p)
 
+* Django REST Framework
+
+* Social Authentication and Authorization Mechanism
+
 ***
 
-*SNIPPETS:*
+*Reference resources:*
 
 [How to Create User Sign Up View](https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html)
 
@@ -44,3 +48,5 @@ Functions has been achieved of the following features:
 [Django By Example](https://www.packtpub.com/web-development/django-example)
 
 [Asynchronous Tasks With Django and Celery](https://realpython.com/blog/python/asynchronous-tasks-with-django-and-celery/)
+
+[How to Add Social Login to Django](https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html)
