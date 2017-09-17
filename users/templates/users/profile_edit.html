@@ -8,77 +8,77 @@
     <div class="container">
         <div class="">
             <div class="unit-1-2 unit-3-on-mobile">
-                  <!--<form action="." method="POST" enctype="multipart/form-data" class="padding">-->
-                    <!--{% csrf_token %}-->
-                      <!--{{ form.as_table }}-->
+                  <form action="." method="POST" enctype="multipart/form-data" class="padding">
+                    {% csrf_token %}
+                      {{ form.as_p }}
                       <!--{{ form.photo }}-->
                       <!--{{ form.gender }}-->
                       <!--{{ form.bio }}-->
                       <!--{{ form.location }}-->
                       <!--{{ form.birthday }}-->
                       <!--{{ form.website }}-->
-                    <!--<button type="submit" class="btn-floating btn-large waves-light waves-effect">-->
-                        <!--<i class="large material-icons">Submit</i>-->
-                    <!--</button>-->
-                    <!--<a href="#" onclick="window.history.back(); return false;" title="Cancel" class="btn-floating waves-effect waves-light red">-->
-                        <!--<i class="material-icons">history</i>-->
-                    <!--</a>-->
-                  <!--</form>-->
+                    <button type="submit" class="btn-floating btn-large waves-light waves-effect">
+                        <i class="large material-icons">Submit</i>
+                    </button>
+                    <a href="#" onclick="window.history.back(); return false;" title="Cancel" class="btn-floating waves-effect waves-light red">
+                        <i class="material-icons">history</i>
+                    </a>
+                  </form>
 
-<div class="row">
-    <div class="col-xs-9">
-        <p></p>
-                <form action="." method="POST" enctype="multipart/form-data" class="form-horizontal">
-                    {% csrf_token %}
-                   <div class="form-group">
-                    <label for="id_gender" class="col-sm-3 control-label">Gender</label>
-                    <div class="col-sm-6">
-                       <select name="gender" id="id_gender" class="form-control">
-                       <option value="1">Male</option>
-                       <option value="2">Female</option>
-                       <option value="3">Secret</option>
-                    </select>
-                    </div>
-                  </div>
-                      <div class="form-group">
-                    <label for="id_bio" class="col-sm-3 control-label">Bio</label>
-                    <div class="col-sm-6">
-                      <input type="text" name="bio" class="form-control" id="id_bio" value="{{ user.profile.bio }}" placeholder="{{ user.profile.bio }}">
-                    </div>
-                  </div>
-                      <div class="form-group">
-                    <label for="id_location" class="col-sm-3 control-label">Location</label>
-                    <div class="col-sm-6">
-                      <input type="text" name="location" class="form-control" id="id_location" value="{{ user.profile.location }}" placeholder="{{ user.profile.location }}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="birthday" class="col-sm-3 control-label">Birthday</label>
-                    <div class="col-sm-6">
-                      <input type="text" name="birthday" class="form-control" id="birthday" value="{{ user.profile.birthday }}" placeholder="{{ user.profile.birthday }}">
-                    </div>
-                  </div>
-                      <div class="form-group">
-                    <label for="website" class="col-sm-3 control-label">Website</label>
-                    <div class="col-sm-6">
-                      <input type="text" name="website" class="form-control" id="website" value="{{ user.profile.website }}" placeholder="{{ user.profile.website }}">
-                    </div>
-                  </div>
-                      <div class="form-group">
-                    <label for="id_photo" class="col-sm-3 control-label">Profile picture</label>
-                    <div class="col-sm-6">
-                          <input type="file" name="photo" id="id_photo">
-                    <p class="help-block">Update new picture for your profile</p>
-                  </div>
-                      </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-6">
-                      <button type="submit" class="btn btn-success">Update profile</button>
-                    </div>
-                  </div>
-                </form>
-                </div>
-                </div>
+<!--<div class="row">-->
+    <!--<div class="col-xs-9">-->
+        <!--<p></p>-->
+                <!--<form action="." method="POST" enctype="multipart/form-data" class="form-horizontal">-->
+                    <!--{% csrf_token %}-->
+                   <!--<div class="form-group">-->
+                    <!--<label for="id_gender" class="col-sm-3 control-label">Gender</label>-->
+                    <!--<div class="col-sm-6">-->
+                       <!--<select name="gender" id="id_gender" class="form-control">-->
+                       <!--<option value="1">Male</option>-->
+                       <!--<option value="2">Female</option>-->
+                       <!--<option value="3">Secret</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                      <!--<div class="form-group">-->
+                    <!--<label for="id_bio" class="col-sm-3 control-label">Bio</label>-->
+                    <!--<div class="col-sm-6">-->
+                      <!--<input type="text" name="bio" class="form-control" id="id_bio" value="{{ user.profile.bio }}" placeholder="{{ user.profile.bio }}">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                      <!--<div class="form-group">-->
+                    <!--<label for="id_location" class="col-sm-3 control-label">Location</label>-->
+                    <!--<div class="col-sm-6">-->
+                      <!--<input type="text" name="location" class="form-control" id="id_location" value="{{ user.profile.location }}" placeholder="{{ user.profile.location }}">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="form-group">-->
+                    <!--<label for="birthday" class="col-sm-3 control-label">Birthday</label>-->
+                    <!--<div class="col-sm-6">-->
+                      <!--<input type="text" name="birthday" class="form-control" id="birthday" value="{{ user.profile.birthday }}" placeholder="{{ user.profile.birthday }}">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                      <!--<div class="form-group">-->
+                    <!--<label for="website" class="col-sm-3 control-label">Website</label>-->
+                    <!--<div class="col-sm-6">-->
+                      <!--<input type="text" name="website" class="form-control" id="website" value="{{ user.profile.website }}" placeholder="{{ user.profile.website }}">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                      <!--<div class="form-group">-->
+                    <!--<label for="id_photo" class="col-sm-3 control-label">Profile picture</label>-->
+                    <!--<div class="col-sm-6">-->
+                          <!--<input type="file" name="photo" id="id_photo">-->
+                    <!--<p class="help-block">Update new picture for your profile</p>-->
+                  <!--</div>-->
+                      <!--</div>-->
+                  <!--<div class="form-group">-->
+                    <!--<div class="col-sm-offset-4 col-sm-6">-->
+                      <!--<button type="submit" class="btn btn-success">Update profile</button>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</form>-->
+                <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
