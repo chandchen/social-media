@@ -8,10 +8,13 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'users/logout.html'}, name='logout'),
 
     # Change Password
-    url(r'^change/$', auth_views.password_change, {'template_name': 'users/change.html',
-                                                   'post_change_redirect': 'users:change_done'}, name='change'),
-    url(r'^change_done/$', auth_views.password_change_done, {'template_name': 'users/change_done.html'},
-        name='change_done'),
+    # url(r'^change/$', auth_views.password_change, {'template_name': 'users/change.html',
+    #                                                'post_change_redirect': 'users:change_done'}, name='change'),
+    # url(r'^change_done/$', auth_views.password_change_done, {'template_name': 'users/change_done.html'},
+    #     name='change_done'),
+
+    url(r'^change/$', views.PasswordChangeView.as_view(), name='change'),
+    url(r'^change_done/$', views.PasswordChangeDoneView.as_view(), name='change_done'),
 
     # Reset Password
     url(r'^reset/$', auth_views.password_reset, {'template_name': 'users/registration/reset_form.html',

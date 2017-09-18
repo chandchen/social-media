@@ -26,7 +26,7 @@ class ImageModel(models.Model):
     status = models.PositiveSmallIntegerField(default=1)
 
     def __unicode__(self):
-        return self.user.username
+        return self.name
 
 
 class FileModel(models.Model):

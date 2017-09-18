@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'social_django',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -178,6 +179,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.qq.QQOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
 )
 
 SOCIAL_AUTH_LOGIN_URL = 'http://chand.com:8000/users/login/'
@@ -197,6 +199,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 SOCIAL_AUTH_QQ_KEY = config('SOCIAL_AUTH_QQ_KEY')
 SOCIAL_AUTH_QQ_SECRET = config('SOCIAL_AUTH_QQ_SECRET')
+
+SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',

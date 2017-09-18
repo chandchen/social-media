@@ -6,9 +6,9 @@
 <div class="flex-center">
     <div class="container">
         <div>
-            <h1 class="logo"><a href="{% url 'index' %}">Home</a></h1>
-            <h2>Congratulation, {{ user.username }}, password changed successfully.</h2>
-            <button class="btn btn-default"><a href="{% url 'users:profile_view' %}">Come back to Profile...</a></button>
+            <h3>Password successfully modified</h3>
+            <p>In order to continue working with the application you have to re-logon.</p>
+            <button class="btn btn-default"><a href="{% url 'users:login' %}">Re-logon...</a></button>
         </div>
     </div>
 </div>

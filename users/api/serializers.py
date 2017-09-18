@@ -1,13 +1,18 @@
 from django.contrib.auth.models import User
 
-from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 from rest_framework import serializers
+from rest_framework.serializers import (
+    ModelSerializer,
+    HyperlinkedIdentityField,
+    HyperlinkedModelSerializer,
+)
 
 from users.models import Profile
 
 
 class UserListSerializer(ModelSerializer):
     detail = HyperlinkedIdentityField(view_name='users-api:detail')
+    email = serializers.EmailField(label='Email Address')
 
     class Meta:
         model = User
@@ -17,8 +22,26 @@ class UserListSerializer(ModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'password',
             'detail',
         ]
+        read_only_fields = [
+            'first_name',
+            'last_name',
+        ]
+
+    def create(self, validated_data):
+        username = validated_data['username']
+        email = validated_data['email']
+        password = validated_data['password']
+        user_obj = User(
+            username=username,
+            email=email,
+        )
+        user_obj.set_password(password)
+        user_obj.save()
+        validated_data['id'] = user_obj.id
+        return validated_data
 
 
 class ProfileDetailSerializer(ModelSerializer):
@@ -39,8 +62,8 @@ class ProfileDetailSerializer(ModelSerializer):
         ]
 
 
-class UserDetailSerializer(ModelSerializer):
-    profile = ProfileDetailSerializer()
+class UserDetailSerializer(HyperlinkedModelSerializer):
+    profile = ProfileDetailSerializer(required=False)
 
     class Meta:
         model = User
@@ -66,18 +89,18 @@ class UserDetailSerializer(ModelSerializer):
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.save()
 
-        profile.photo = validated_data.get('photo', profile.photo)
-        profile.bio = validated_data.get('bio', profile.bio)
-        profile.location = validated_data.get('location', profile.location)
-        profile.birthday = validated_data.get('birthday', profile.birthday)
-        profile.website = validated_data.get('website', profile.website)
+        profile.photo = profile_data.get('photo', profile.photo)
+        profile.bio = profile_data.get('bio', profile.bio)
+        profile.location = profile_data.get('location', profile.location)
+        profile.birthday = profile_data.get('birthday', profile.birthday)
+        profile.website = profile_data.get('website', profile.website)
         profile.save()
 
         return instance
 
 
 class UserCreateSerializer(ModelSerializer):
-    email = serializers.EmailField(max_length=100, help_text='Required')
+    email = serializers.EmailField(label='Email Address')
 
     class Meta:
         model = User
@@ -100,25 +123,32 @@ class UserCreateSerializer(ModelSerializer):
         return validated_data
 
 
-class UserProfileSerializer(ModelSerializer):
-
-    user = UserDetailSerializer(read_only=True)
+class UserLoginSerializer(ModelSerializer):
+    token = serializers.CharField(allow_blank=True, read_only=True)
+    username = serializers.CharField()
 
     class Meta:
-        model = Profile
+        model = User
         fields = [
-            'user',
-            'photo',
-            'gender',
-            'bio',
-            'location',
-            'birthday',
-            'website',
+            'username',
+            'password',
+            'token',
         ]
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
-    def get_photo(self, obj):
-        try:
-            photo = obj.photo.url
-        except:
-            photo = None
-        return photo
+    def validate(self, data):
+        username = data['username']
+        password = data['password']
+        user = User.objects.filter(username=username)
+        if user.exists():
+            user_obj = User.objects.get(username=username)
+            if user_obj.check_password(password):
+                return data
+            else:
+                raise serializers.ValidationError(
+                    "Username and password doesn't match!")
+        else:
+            raise serializers.ValidationError(
+                "User do not exists!")

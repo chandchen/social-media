@@ -1,4 +1,5 @@
 {% extends 'users/base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}Change your password{% endblock %}
 
@@ -7,27 +8,65 @@
     <div class="container">
         <div class="flex-center">
             <div class="unit-1-2 unit-1-on-mobile">
+            <div class="row">
+                    <div class="col-xs-4">
+                    </div>
+                <div class="col-xs-4">
+                <h4>Change Your Password</h4>
+                <!--<form class="form" method="post">-->
+                    <!--{% csrf_token %}-->
+                    <!--<input type="hidden" name="next" value="{{ next }}"/>-->
+                    <!--{{ form.non_field_errors }}-->
+                    <!--{% for field in form %}-->
+                    <!--<p>{{ field.label_tag }}</p>-->
+                    <!--<p>{{ field }}</p>-->
+                        <!--{% for error in field.errors %}-->
+                            <!--<p style="color: red">{{ error }}</p>-->
+                        <!--{% endfor %}-->
+                    <!--{% endfor %}-->
+                    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                <!--</form>-->
+                  <form method="post" novalidate>
+                  {% csrf_token %}
 
-                <h3>Change Password</h3>
-                {% if form.errors %}
-                    <p style="color: red">Your username and password doesn't match. Please try again.</p>
-                {% endif %}
-                <form class="form" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                    {{ form.non_field_errors }}
-                    {% for field in form %}
-                    <p>{{ field.label_tag }}</p>
-                    <p>{{ field }}</p>
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                  {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field }}
+                  {% endfor %}
 
+                  {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                      {% for error in form.non_field_errors %}
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+
+                  {% for field in form.visible_fields %}
+                    <div class="form-group">
+                      {{ field.label_tag }}
+
+                      {% if form.is_bound %}
+                        {% if field.errors %}
+                          {% render_field field class="form-control is-invalid" %}
+                          {% for error in field.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field field class="form-control" %}
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}

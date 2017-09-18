@@ -1,28 +1,71 @@
 {% extends 'users/base.html' %}
+{% load widget_tweaks %}
 
-{% block title %}Sign in with chand home{% endblock %}
+{% block title %}Sign in Professional{% endblock %}
 
 {% block content %}
 <div class="flex-center">
     <div class="container">
         <div class="flex-center">
             <div class="unit-1-2 unit-1-on-mobile">
-                <h3>Sign in</h3>
                 <div class="row">
-                <div class="col-xs-9">
-                <form class="form" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
+                    <div class="col-xs-4">
+                    </div>
+                <div class="col-xs-4">
+                <h3>Sign in Professional</h3>
+                <!--<form class="form" method="post">-->
+                    <!--{% csrf_token %}-->
+                    <!--{{ form.as_p }}-->
+                    <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
+                <!--</form>-->
+                <form method="post" novalidate>
+                  {% csrf_token %}
+
+                  {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field }}
+                  {% endfor %}
+
+                  {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                      {% for error in form.non_field_errors %}
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+
+                  {% for field in form.visible_fields %}
+                    <div class="form-group">
+                      {{ field.label_tag }}
+
+                      {% if form.is_bound %}
+                        {% if field.errors %}
+                          {% render_field field class="form-control is-invalid" %}
+                          {% for error in field.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field field class="form-control" %}
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                    <p></p>
                 <div>
-                <a href="{% url 'social:begin' 'weibo' %}"><img src="http://www.sinaimg.cn/blog/developer/wiki/32x32.png" width="26px"></a>
-                <a href="{% url 'social:begin' 'twitter' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/5524/36.png" width="30px"></a>
-                <a href="{% url 'social:begin' 'qq' %}"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png" width="65px"></a>
-                <a href="{% url 'social:begin' 'google' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/5524/18.png" width="30px"></a>
+                <a href="{% url 'social:begin' 'twitter' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/4843/twitter.png" width="30px"></a>
+                <a href="{% url 'social:begin' 'weibo' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/4843/vimeo.png" width="30px"></a>
+                <!--<a href="{% url 'social:begin' 'qq' %}"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png" width="65px"></a>-->
+                <a href="{% url 'social:begin' 'google' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/4843/googleplus.png" width="30px"></a>
+                <a href="{% url 'social:begin' 'facebook' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/4843/facebook.png" width="30px"></a>
+                <a href="{% url 'social:begin' 'facebook' %}"><img src="http://pics.sc.chinaz.com/Files/pic/icons128/4843/youtube.png" width="30px"></a>
                 </div>
                 <div class="flex-left top-gap text-small">
-                    <div class="unit-2-3"><span>Don't have account yet? <a href="{% url 'users:register' %}">Register Now</a></span></div>
+                    <div class="unit-2-3"><span>Don't have account yet? <a href="{% url 'users:register' %}">Register Now!</a></span></div>
                     <div class="unit-1-3 flex-right"><span><a href="{% url 'users:reset_form' %}">Forgot Password?</a></span></div>
                 </div>
                 </div>

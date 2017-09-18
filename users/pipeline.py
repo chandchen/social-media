@@ -9,10 +9,13 @@ def get_username(strategy, details, backend, response, user=None, *args, **kwarg
         username = 'twitter' + response.get('id_str')
     elif backend.name == 'qq':
         username = 'qq123'
+    elif backend.name == 'facebook':
+        username = 'facebookuser'
     return {'username': username}
 
 
 def save_profile(backend, user, response, *args, **kwargs):
+
     if backend.name == 'weibo':
         if not user.profile.gender:
             gender = response.get('gender')
@@ -35,6 +38,7 @@ def save_profile(backend, user, response, *args, **kwargs):
         if not user.profile.website:
             user.profile.website = response.get('url')
         user.save()
+
     elif backend.name == 'twitter':
         if not user.profile.gender:
             gender = response.get('gender')
@@ -57,11 +61,18 @@ def save_profile(backend, user, response, *args, **kwargs):
         if not user.profile.website:
             user.profile.website = response.get('url')
         user.save()
+
     elif backend.name == 'qq':
         print('*' * 80)
         print(response)
+
+    elif backend.name == 'facebook':
+        print('*' * 80)
+        print(response)
+
     else:
         pass
+
 
 weibo_info = {u'bi_followers_count': 358,
               u'domain': u'suchcool',
