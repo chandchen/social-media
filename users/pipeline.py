@@ -8,7 +8,7 @@ def get_username(strategy, details, backend, response, user=None, *args, **kwarg
     elif backend.name == 'twitter':
         username = 'twitter' + response.get('id_str')
     elif backend.name == 'qq':
-        username = 'qq' + response.get('nickname')
+        username = response.get('nickname')
     elif backend.name == 'facebook':
         username = 'facebook' + response.get('id')
     return {'username': username}
@@ -67,6 +67,27 @@ def save_profile(backend, user, response, *args, **kwargs):
     elif backend.name == 'qq':
         print('*' * 80)
         print(response)
+        if not user.profile.gender:
+            gender = response.get('gender')
+            if gender == u'\u7537':
+                user.profile.gender = 1
+            elif gender == "f":
+                user.profile.gender = 2
+            else:
+                user.profile.gender = 3
+        if not user.email:
+            user.email = str(response.get('year')) + '@qq.com'
+        if not user.profile.photo:
+            user.profile.photo = response.get('figureurl_qq_2')
+        if not user.profile.bio:
+            user.profile.bio = response.get('nickname')
+        if not user.profile.location:
+            user.profile.location = response.get('province') + ' ' + response.get('city')
+        if not user.profile.birthday:
+            user.profile.birthday = timezone.now()
+        if not user.profile.website:
+            user.profile.website = response.get('url')
+        user.save()
 
     elif backend.name == 'facebook':
         print('*' * 80)
