@@ -8,15 +8,17 @@ def get_username(strategy, details, backend, response, user=None, *args, **kwarg
     elif backend.name == 'twitter':
         username = 'twitter' + response.get('id_str')
     elif backend.name == 'qq':
-        username = 'qq123'
+        username = 'qq' + response.get('nickname')
     elif backend.name == 'facebook':
-        username = 'facebookuser'
+        username = 'facebook' + response.get('id')
     return {'username': username}
 
 
 def save_profile(backend, user, response, *args, **kwargs):
 
     if backend.name == 'weibo':
+        print('*' * 80)
+        print(response)
         if not user.profile.gender:
             gender = response.get('gender')
             if gender == "m":
@@ -69,6 +71,27 @@ def save_profile(backend, user, response, *args, **kwargs):
     elif backend.name == 'facebook':
         print('*' * 80)
         print(response)
+        if not user.profile.gender:
+            gender = response.get('gender')
+            if gender == "m":
+                user.profile.gender = 1
+            elif gender == "f":
+                user.profile.gender = 2
+            else:
+                user.profile.gender = 3
+        if not user.email:
+            user.email = response.get('email')
+        if not user.profile.photo:
+            user.profile.photo = response.get('profile_image_url')
+        if not user.profile.bio:
+            user.profile.bio = response.get('description')
+        if not user.profile.location:
+            user.profile.location = response.get('location')
+        if not user.profile.birthday:
+            user.profile.birthday = timezone.now()
+        if not user.profile.website:
+            user.profile.website = response.get('url')
+        user.save()
 
     else:
         pass
@@ -218,3 +241,35 @@ twitter_info = {u'follow_request_sent': False,
                 u'protected': False,
                 u'default_profile': True,
                 u'is_translator': False}
+
+qq_info = {u'province': u'\u798f\u5efa',
+           'openid': u'114545A9A46A09CE67C78DB8F2DF2D09',
+           u'yellow_vip_level': u'0',
+           u'is_lost': 0,
+           u'figureurl_qq_2': u'http://q.qlogo.cn/qqapp/101425423/114545A9A46A09CE67C78DB8F2DF2D09/100',
+           u'vip': u'0',
+           u'is_yellow_year_vip': u'0',
+           u'year': u'1992',
+           u'nickname': u'Hey\u4e36',
+           u'refresh_token': u'CA7EB24BCD56AEBF9DF3E9BDF26A32D9',
+           u'figureurl_1': u'http://qzapp.qlogo.cn/qzapp/101425423/114545A9A46A09CE67C78DB8F2DF2D09/50',
+           u'city': u'\u53a6\u95e8',
+           u'figureurl': u'http://qzapp.qlogo.cn/qzapp/101425423/114545A9A46A09CE67C78DB8F2DF2D09/30',
+           u'figureurl_2': u'http://qzapp.qlogo.cn/qzapp/101425423/114545A9A46A09CE67C78DB8F2DF2D09/100',
+           u'level': u'0', u'access_token': u'1E49303D71A227FEADD52FED1E8212AA',
+           u'gender': u'\u7537',
+           u'expires_in': u'7776000',
+           u'figureurl_qq_1': u'http://q.qlogo.cn/qqapp/101425423/114545A9A46A09CE67C78DB8F2DF2D09/40',
+           u'ret': 0,
+           u'is_yellow_vip': u'0',
+           u'msg': u''}
+
+
+facebook = {'granted_scopes': [u'email', u'publish_actions', u'public_profile'],
+            u'first_name': u'Chand',
+            u'last_name': u'Chen',
+            u'name': u'Chand Chen',
+            'access_token': u'EAAC88uSVPqoBAJgD6dbNXW6fxreWn8S6ctrHca6N7W5QC5c4ZCZAj4IlqUQBUxrtFZB0TP84TpvHP7iB2c4yzgZBJXXqWhvc3gz4Ktcm9ZBST7gECQthXPmsHyhnULvpYlTHJcZADMcsqvRialh7HSqlD3soe0f6n8jdTywMbXQQZALDJqNOznb',
+            'expires': 5163999,
+            u'id': u'162411090992741',
+            u'email': u'changduchen@gmail.com'}

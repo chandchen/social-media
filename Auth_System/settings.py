@@ -191,6 +191,11 @@ SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = 'http://chand.com:8000/'
 SOCIAL_AUTH_WEIBO_KEY = config('SOCIAL_AUTH_WEIBO_KEY')
 SOCIAL_AUTH_WEIBO_SECRET = config('SOCIAL_AUTH_WEIBO_SECRET')
 
+SOCIAL_AUTH_WEIBO_SCOPE = ['email']
+SOCIAL_AUTH_WEIBO_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, first_name, last_name, name, email',
+}
+
 SOCIAL_AUTH_TWITTER_KEY = config('SOCIAL_AUTH_TWITTER_KEY')
 SOCIAL_AUTH_TWITTER_SECRET = config('SOCIAL_AUTH_TWITTER_SECRET')
 
@@ -207,7 +212,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
+    # 'social_core.pipeline.user.get_username',
     'users.pipeline.get_username',
     'social_core.pipeline.user.create_user',
     'users.pipeline.save_profile',
@@ -218,3 +223,8 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 SOCIAL_AUTH_QQ_USE_OPENID_AS_USERNAME = True
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'publish_actions']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, first_name, last_name, name, email',
+}
