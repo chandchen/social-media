@@ -17,7 +17,10 @@
                 <img src="{{ image.image.url }}" style="width:240px;height:160px">
             </a>
             <div class="caption">
-                <div class="text-muted">{{ image.name }}</div>
+                <div class="text-muted" style='width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;' title="{{ image.name }}">
+                    <span class="label label-success">Photo</span>
+                    {{ image.name }}
+                </div>
                 <br>
                 <p><a href="#" class="btn btn-primary" role="button">select</a></p>
             </div>
@@ -30,7 +33,10 @@
                 <img src="{{ file.thumbnail.url }}" style="width:240px;height:160px">
             </a>
             <div class="caption">
-                <div class="text-muted">{{ file.description }}</div>
+                <div class="text-muted" style='width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;' title="{{ file.description }}">
+                    <span class="label label-info">Video</span>
+                    {{ file.description }}
+                </div>
                 <br>
                 <p><a href="#" class="btn btn-primary" role="button">select</a></p>
             </div>
